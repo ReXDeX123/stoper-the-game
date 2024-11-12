@@ -88,12 +88,11 @@ while p == 0:
     if liczbapr < 2:
         liczbapr = 2
     if a % 2 == 0:
+        losn = 0
         while losn == 0:
             losn = random.randint((n+1)*-100,(n+1)*100)
         while timer < liczbapr:
             wyb=int(input("jak sadzisz co wylosowala partia "))
-            if wyb == losn:
-                continue
             if wyb % 2 == 0 and losn % 2 == 0:
                 print("liczba jest parzysta")
             elif wyb % 2 == 1 and losn % 2 == 1:
