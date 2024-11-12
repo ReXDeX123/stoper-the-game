@@ -1,5 +1,6 @@
 import random
 import time
+import sys
 def prime_numbers(n):
     number=[x for x in range(n+1)]
     try:
@@ -26,6 +27,9 @@ lvl = 0
 losn= 0
 p=0
 wyb = 0
+miejski = open("miejski2.txt","r",encoding="utf-8").readlines()
+miejski = str(miejski).replace("'", "").replace("\\", "").replace("[", "").replace("]", "").split(",")
+
 while p == 0:
     a = random.randint(1,100)
     print(f"mineło {e} dni {d} godzin {c} minut {b} sekund")
@@ -85,14 +89,23 @@ while p == 0:
         print("odblokowałeś pegeota")
     time.sleep(a)
     liczbapr = 15 - n
-    if liczbapr < 2:
+    if liczbapr <= 2:
         liczbapr = 2
-    if a % 2 == 0:
+    los1=random.randint(1,5)
+    if los1 == 1:
         losn = 0
         while losn == 0:
             losn = random.randint((n+1)*-100,(n+1)*100)
         while timer < liczbapr:
-            wyb=int(input("jak sadzisz co wylosowala partia "))
+            wyb=input("jak sadzisz co wylosowala partia ")
+            try:
+                wyb=int(wyb)
+            except:
+                continue
+            if wyb == losn:
+                print("wygrałeś")
+                timer = 0
+                break
             if wyb % 2 == 0 and losn % 2 == 0:
                 print("liczba jest parzysta")
             elif wyb % 2 == 1 and losn % 2 == 1:
@@ -109,12 +122,49 @@ while p == 0:
                 print("liczba is too big")
             elif wyb < losn:
                 print("liczba is too low")
-            else:
-                print("wygrałeś")
-                timer = 0
-                break
+
             timer = timer +1
             if timer == liczbapr:
                 p=1
                 break
-            
+    los2 = random.randint(1,20)
+    if los2 == 1:
+        sigma=0
+        loss = random.choice(miejski)
+        loss=loss.lower().strip()
+        listaloss =[]
+        blad = 0
+
+        for x in loss:
+            listaloss.append(x)
+        tablica="_"*len(listaloss)
+        tablica=[x for x in tablica]
+        liczpodej = 24-n
+        if liczpodej <= 4:
+            liczpodej = 4
+        while sigma == 0:
+            if blad == liczpodej:
+                print("przegrałeś")
+                print(f"haslem było {loss}")
+                sys.exit(0)
+            print(tablica)
+            strinput=str(input("wybierz literke badz haslo "))
+            if strinput == loss:
+                print("wygrałeś")
+                break
+            else:
+                pass
+            if strinput not in listaloss:
+                blad = blad + 1
+            if len(strinput) == 1:
+                while strinput in listaloss:
+                    try:
+                        index=listaloss.index(strinput)
+                        tablica[index] = strinput
+                        listaloss[index] = "zgadniete"
+                    except:
+                        continue
+            if listaloss.count("zgadniete") == len(listaloss):
+                print("wygrałeś")
+                listalos=[]
+                sigma = 1
