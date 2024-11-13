@@ -18,6 +18,32 @@ def prime_numbers(n):
     for x in number:
         number.append(x*-1)
     return number
+def perfect_numbers(n):
+  liczby = []
+  dzielniki = []
+  if n > 0:
+    for x in range(0,n):
+      liczby.append(x)
+      try:
+        liczby.remove(0)
+      except:
+        pass
+  if n <0:
+    for x in range(0,(n*-1)):
+      liczby.append(x*-1)
+      try:
+        liczby.remove(0)
+      except:
+        pass
+  for x in liczby:
+    if n % x == 0:
+      dzielniki.append(x)
+    else:
+      continue
+  if sum(dzielniki) == n:
+    return "jest"
+  else:
+   return "nie jest" 
 b=0
 timer=0
 c=0
@@ -131,6 +157,10 @@ while p == 0:
                 print("liczba is dodatnia")
             elif losn < 0 and wyb < 0:
                 print("liczba is ujemna")
+            if perfect_numbers(wyb) == "jest" and perfect_numbers(losn) == "jest":
+                print("liczba jest liczba doskonała")
+            elif perfect_numbers(wyb) == "nie jest" and perfect_numbers(losn) == "nie jest": 
+                print("liczba nie jest liczba doskonałą")
             
             timer = timer +1
             if timer == liczbapr:
