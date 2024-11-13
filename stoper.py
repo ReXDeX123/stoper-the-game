@@ -115,7 +115,10 @@ while p == 0:
             else:
                 pass
             if wyb in prime_numbers(n=losn) and losn in prime_numbers(n=losn):
-                print("liczba is pierwsza")
+                if wyb > 0 and losn > 0:
+                    print("liczba is pierwsza")
+                elif wyb < 0 and losn < 0:
+                    print("liczba jest ujemna liczba pierwsza")
             elif wyb not in prime_numbers(n=losn) and losn not in prime_numbers(n=losn):
                 print("liczba is not pierwsza")
             else:
