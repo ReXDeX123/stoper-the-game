@@ -115,7 +115,7 @@ while p == 0:
         print("odblokowałeś Makowca")
     elif czas == 207:
         print("odblokowałeś pegeota")
-    time.sleep(1)
+    time.sleep(a)
     liczbapr = 15 - n
     if liczbapr <= 2:
         liczbapr = 2
@@ -166,7 +166,7 @@ while p == 0:
             if timer == liczbapr:
                 p=1
                 break
-    los2 = random.randint(1,1)
+    los2 = random.randint(1,20)
     if los2 == 1:
         sigma=0
         loss = random.choice(miejski)
