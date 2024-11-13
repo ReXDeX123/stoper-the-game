@@ -15,6 +15,8 @@ def prime_numbers(n):
                 number.remove(a)
             except:
                 continue
+    for x in number:
+        number.append(x*-1)
     return number
 b=0
 timer=0
@@ -87,7 +89,7 @@ while p == 0:
         print("odblokowałeś Makowca")
     elif czas == 207:
         print("odblokowałeś pegeota")
-    time.sleep(a)
+    time.sleep(1)
     liczbapr = 15 - n
     if liczbapr <= 2:
         liczbapr = 2
@@ -95,7 +97,7 @@ while p == 0:
     if los1 == 1:
         losn = 0
         while losn == 0:
-            losn = random.randint((n+1)*-100,(n+1)*100)
+            losn = random.randint((n+1)*-50,(n+1)*50)
         while timer < liczbapr:
             wyb=input("jak sadzisz co wylosowala partia ")
             try:
@@ -122,12 +124,16 @@ while p == 0:
                 print("liczba is too big")
             elif wyb < losn:
                 print("liczba is too low")
-
+            if losn > 0 and wyb > 0:
+                print("liczba is dodatnia")
+            elif losn < 0 and wyb < 0:
+                print("liczba is ujemna")
+            
             timer = timer +1
             if timer == liczbapr:
                 p=1
                 break
-    los2 = random.randint(1,20)
+    los2 = random.randint(1,1)
     if los2 == 1:
         sigma=0
         loss = random.choice(miejski)
@@ -139,6 +145,11 @@ while p == 0:
             listaloss.append(x)
         tablica="_"*len(listaloss)
         tablica=[x for x in tablica]
+        symbols = [' ','`','~','!','@','#','$','%','^','&','*','(',')','_','-','+','=','{','[','}','}','|','\\',':',';','"','\'','<',',','>','.','?','/']
+        for x in listaloss:
+            if x in symbols:
+                index2 = listaloss.index(x)
+                tablica[index2] = x
         liczpodej = 24-n
         if liczpodej <= 4:
             liczpodej = 4
