@@ -183,6 +183,7 @@ while p == 0:
             if x in symbols:
                 index2 = listaloss.index(x)
                 tablica[index2] = x
+                listaloss[index2] = "zgadniete"
         liczpodej = 24-n
         if liczpodej <= 4:
             liczpodej = 4
