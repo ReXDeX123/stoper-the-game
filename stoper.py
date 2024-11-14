@@ -338,8 +338,6 @@ while p == 0:
                     print("liczba is pierwsza")
                 elif wyb < 0 and losn < 0:
                     print("liczba jest ujemna liczba pierwsza")
-            elif wyb not in pnl or wyb not in pn2 and losn not in pnl or losn not in pn2:
-                print("liczba is not pierwsza")
             else:
                 pass
             if wyb > losn:
