@@ -251,6 +251,8 @@ while p == 0:
         while losn == 0:
             losn = random.randint((n+1)*-50,(n+1)*50)
         while timer < liczbapr:
+            rizlerka = prime_numbers(n=(n+1)*50)
+            rizler = prime_numbers(n=(n+1)*50)
             zycia = liczbapr - timer
             print(fr"masz {zycia}❤️")
             wyb=input("jak sadzisz co wylosowala partia ")
@@ -331,16 +333,11 @@ while p == 0:
                 print("liczba jest parzysta")
             elif wyb % 2 == 1 and losn % 2 == 1:
                 print("liczba jest nieparzysta")
-            pnl = prime_numbers((n+1)*50)
-            pn2 = prime_numbers(n=((n+1)*-50))
-            try:
-                if losn in pn1 or losn in pn2:
-                    if wyb > 0 and losn > 0:
-                        print("liczba is pierwsza")
-                    elif wyb < 0 and losn < 0:
-                        print("liczba jest ujemna liczba pierwsza")
-            except:
-                pass
+            if wyb in rizler or losn in rizlerka:
+                if losn in rizler or losn in rizlerka:
+                    print("liczba is pierwsza")
+                else:
+                    print("nie jest liczba 1")
             else:
                 pass
             if wyb > losn:
