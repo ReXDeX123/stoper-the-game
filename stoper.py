@@ -331,10 +331,8 @@ while p == 0:
                 print("liczba jest parzysta")
             elif wyb % 2 == 1 and losn % 2 == 1:
                 print("liczba jest nieparzysta")
-            if losn > 0:
-                pnl = prime_numbers((n+1)*50)
-            elif losn < 0:
-                pn2 = prime_numbers(n=((n+1)*-50))
+            pnl = prime_numbers((n+1)*50)
+            pn2 = prime_numbers(n=((n+1)*-50))
             if wyb in pnl or wyb in pn2 and losn in pnl or losn in pn2:
                 if wyb > 0 and losn > 0:
                     print("liczba is pierwsza")
