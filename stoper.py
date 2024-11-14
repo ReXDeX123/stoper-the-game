@@ -327,9 +327,9 @@ while p == 0:
             elif wyb % 2 == 1 and losn % 2 == 1:
                 print("liczba jest nieparzysta")
             if losn > 0:
-                pnl = prime_numbers(n=losn)
+                pnl = prime_numbers((n+1)*50)
             elif losn < 0:
-                pnl = prime_numbers(n=(losn*-1))
+                pnl = prime_numbers(n=((n+1)*-50))
             if wyb in pnl or wyb*-1 in pnl and losn in pnl or losn*-1 in pnl:
                 if wyb > 0 and losn > 0:
                     print("liczba is pierwsza")
