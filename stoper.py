@@ -333,7 +333,7 @@ while p == 0:
                 print("liczba jest nieparzysta")
             pnl = prime_numbers((n+1)*50)
             pn2 = prime_numbers(n=((n+1)*-50))
-            if losn in pn1 or losn in pn2
+            if losn in pn1 or losn in pn2:
                 if wyb > 0 and losn > 0:
                     print("liczba is pierwsza")
                 elif wyb < 0 and losn < 0:
