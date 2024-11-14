@@ -26,7 +26,8 @@ def prime_numbers(n):
                 pass
         return num
     elif n < 0:
-        number=[x for x in range((n+1)*-1)]
+        n= n*-1
+        number=[x for x in range(n+1)]
         try:
             number.pop(0)
             number.pop(0)
@@ -323,6 +324,7 @@ while p == 0:
             if wyb == losn:
                 print("wygrałeś")
                 monety = monety + random.randint(1,35)
+                print(rf"posiadasz {monety}💰") 
                 timer = 0
                 break
             if wyb % 2 == 0 and losn % 2 == 0:
@@ -443,6 +445,7 @@ while p == 0:
             if strinput == loss:
                 print("wygrałeś")
                 monety = monety + random.randint(1,75)
+                print(rf"posiadasz {monety}💰") 
                 break
             else:
                 pass
@@ -462,6 +465,7 @@ while p == 0:
                 print("wygrałeś")
                 monrand = random.randint(1,75)
                 monety = monety + monrand
+                print(rf"posiadasz {monety}💰") 
                 listalos=[]
                 sigma = 1
 
