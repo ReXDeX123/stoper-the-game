@@ -313,6 +313,9 @@ while p == 0:
             elif wyb=="use żarówka" and eq.count("żarówka") == 0:
                 print(r"nie masz 💡")
                 continue
+            if wyb == "eq" or wyb == "open eq":
+                eqd(eq)
+                continue
             try:
                 wyb=int(wyb)
             except:
@@ -433,6 +436,9 @@ while p == 0:
                     print("jest to słowo z slownika miejski.pl")
             elif strinput=="use żarówka" and eq.count("żarówka") > 0:
                 print(r"nie masz 💡")
+                continue
+            if strinput == "eq" or strinput == "open eq":
+                eqd(eq)
                 continue
             if strinput == loss:
                 print("wygrałeś")
