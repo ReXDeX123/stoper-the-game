@@ -334,13 +334,13 @@ while p == 0:
             if losn > 0:
                 pnl = prime_numbers((n+1)*50)
             elif losn < 0:
-                pnl = prime_numbers(n=((n+1)*-50))
-            if wyb in pnl or wyb*-1 in pnl and losn in pnl or losn*-1 in pnl:
+                pn2 = prime_numbers(n=((n+1)*-50))
+            if wyb in pnl or wyb in pn2 and losn in pnl or losn in pn2:
                 if wyb > 0 and losn > 0:
                     print("liczba is pierwsza")
                 elif wyb < 0 and losn < 0:
                     print("liczba jest ujemna liczba pierwsza")
-            elif wyb not in pnl or wyb*-1 not in pn1 and losn not in pnl or losn*-1 not in pn1:
+            elif wyb not in pnl or wyb not in pn2 and losn not in pnl or losn not in pn2:
                 print("liczba is not pierwsza")
             else:
                 pass
