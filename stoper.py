@@ -2,7 +2,32 @@ import random
 import time
 import sys
 from colorama import Fore, Back
-import os 
+import os
+class gracz:
+    def __init__(self,hp,n,dmg,ataki,name,skin,effect=[]):
+        self.name=name
+        self.skin=skin
+        self.hp=hp*n//3
+        self.dmg=dmg*n//3
+        self.ataki=ataki
+        self.effect=effect
+class mob:
+    def __init__(self,hp,n,lvl,dmg,ataki,name,skin,effect=[]):
+        self.name=name
+        self.skin=skin
+        self.lvl=random.randint(1+n*lvl,n*5*lvl)
+        self.hp=hp*lvl//3
+        self.dmg=dmg*lvl//3
+        self.ataki=ataki
+        self.effect=effect
+    def atak(self,enemy):
+        tatak=random.choice(self.ataki)
+        if tatak == "bite":
+            enemy.hp -= 20*self.dmg
+            simba=len(enemy.effect)
+            enemy.effect.append("krwawienie")
+            print(fr"{self.name} urzywa bite twoje hp spada do "+ fr"{enemy.hp}❤" if enemy.hp > 0 else r"0❤")
+            print(fr'został na cb nałożony efekt {enemy.effect[simba-1]}🩸' if simba < len(enemy.effect) else ' ')
 def prime_numbers(n):
     if n > 0:
         number=[x for x in range(n+1)]
@@ -98,7 +123,7 @@ klepsydra = 0
 miejski = open("miejski2.txt","r",encoding="utf-8").readlines()
 miejski = str(miejski).replace("'", "").replace("\\", "").replace("[", "").replace("]", "").split(",")
 eq = []
-monety = 0
+monety = 1000000000000000000
 while p == 0:
     if klepsydra == 0:
         a = random.randint(1,50)
@@ -130,7 +155,7 @@ while p == 0:
     lvl = lvl + czas
     l = l+a
     g = n*1000
-    time.sleep(a)
+    time.sleep(1)
     if l > 1000 :
         l=0
         n = n + 1
@@ -167,7 +192,7 @@ while p == 0:
         print("odblokowałeś pegeota")
     lossklep = 0
     if monety > 0:
-        lossklep = random.randint(1,30)
+        lossklep = random.randint(1,1)
     if lossklep == 1:
         eqd(eq)
         print(r"                                                        🛒Witaj w sklepie🛒")
@@ -283,7 +308,7 @@ while p == 0:
             if wyb=="use żarówka" and eq.count("żarówka") > 0:
                 eq.remove("żarówka")
                 print(fr"użyeś żarówka zostało ci {eq.count('żarówka')}💡")
-                zarlos=randint(1,12)
+                zarlos=random.randint(1,12)
                 if zarlos == 1:
                     wiekszeniz50 = losn > 50
                     print(f"{'jest' if wiekszeniz50 else 'nie jest'} wieksze od 50")
@@ -407,12 +432,12 @@ while p == 0:
             elif strinput=="use roszada" and eq.count("roszada") == 0:
                 print(r"nie masz ⇄")
                 continue
-            if strinput=="zbroja" and eq.count("zbroja") > 0:
+            if strinput=="use zbroja" and eq.count("zbroja") > 0:
                 eq.remove("zbroja")
                 print(fr"użyeś roszady zostało ci {eq.count('zbroja')}🧥")
                 blad = blad - 4
                 continue
-            elif strinput=="zbroja" and eq.count("zbroja") == 0:
+            elif strinput=="use zbroja" and eq.count("zbroja") == 0:
                 print(r"nie masz 🧥")
                 continue
             if strinput=="use tarcza" and eq.count("tarcza") > 0:
@@ -423,8 +448,8 @@ while p == 0:
                 print(r"nie masz 🛡")
                 continue
             if strinput=="use żarówka" and eq.count("żarówka") > 0:
-                kys=randint(0,10)
-                if kys > 10:
+                kys=random.randint(0,10)
+                if kys < 10:
                     strinput = "zgadniete"
                     eq.remove("żarówka")
                     print(fr"użyeś roszady zostało ci {eq.count('żarówka')}💡")
@@ -464,6 +489,5 @@ while p == 0:
                 print(rf"posiadasz {monety}💰") 
                 listalos=[]
                 sigma = 1
-
-                
+ 
                 
