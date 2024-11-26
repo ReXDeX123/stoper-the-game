@@ -12,6 +12,7 @@ class gracz:
         self.os=0
         self.lvl=n
         self.kys=0
+        self.ski=0
     def atak(self,enemy,tatak):
         if tatak == "bite"and "bite" in self.ataki:
             if "krwawienie" not in enemy.effect:
@@ -65,6 +66,13 @@ class gracz:
             else: 
                 enemy.hp -= 5*self.dmg
                 print(fr"self.name nie moze wykonac na {enemy.name} wiec uderza cie i zostaje ci "+ fr"{enemy.hp}❤" if enemy.hp > 0 else r"przegrałeś")
+        if tatak == "thunderbolt":
+            enemy.hp -= 10*self.dmg
+            print(fr"self.name nie moze wykonac na {enemy.name} wiec uderza cie i zostaje ci "+ fr"{enemy.hp}❤" if enemy.hp > 0 else r"przegrałeś")
+            lospar=random.randint(1,5)
+            if lospar == 1:
+                enemy.effect.append("paralisz")
+                print(f"został namożony paralisz ⚡ na {enemy.name}")
 class mob:
     def __init__(self,hp,n,dmg,ataki,name,skin,typ,effect=[]):
         self.name=name
@@ -79,6 +87,7 @@ class mob:
         self.kr=0
         self.os=0
         self.kys=0
+        self.ski=0
     def atak(self,enemy):
         tatak=random.choice(self.ataki)
         if tatak == "bite":
@@ -126,6 +135,17 @@ class mob:
             else: 
                 enemy.hp -= 5*self.dmg
                 print(fr"self.name nie moze wykonac na {enemy.name} wiec uderza cie i zostaje ci "+ fr"{enemy.hp}❤" if enemy.hp > 0 else r"przegrałeś")
+        if tatak == "thunderbolt":
+                enemy.hp -= 10*self.dmg
+                print(fr"self.name nie moze wykonac na {enemy.name} wiec uderza cie i zostaje ci "+ fr"{enemy.hp}❤" if enemy.hp > 0 else r"przegrałeś")
+                lospar=random.randint(1,5)
+                if lospar == 1:
+                    enemy.effect.append("paralisz")
+                    print(f"został namożony paralisz ⚡ na {enemy.name}")
+        if tatak == "skibidi atack":
+            enemy.hp -= 2*self.dmg
+            enemy.effect.append("skibidi")
+            enemy.ski = 5
 def effekty(enemy,ty):
     if "krwawienie" in enemy.effect:
         enemy.kr -=1
@@ -156,10 +176,10 @@ def effekty(enemy,ty):
         
                 
 n=3
-agracz=gracz(hp=100,n=n,dmg=10,ataki=["bite","smite","osłabienie","lifedrain","krzyk starej"],name="gracz",skin=r"🐱‍👤")
-slime=mob(hp=200,n=n,dmg=10,ataki=["bite","smite","lifedrain","osłabienie","krzyk starej"],name="slime",skin=r"🟢",typ="slime")
+agracz=gracz(hp=100,n=n,dmg=10,ataki=["bite","smite","osłabienie","lifedrain","krzyk starej","thunderbolt"],name="gracz",skin=r"🐱‍👤")
+slime=mob(hp=200,n=n,dmg=10,ataki=["bite","smite","lifedrain","osłabienie","krzyk starej","thunderbolt"],name="slime",skin=r"🟢",typ="slime")
 print(fr"{agracz.hp}❤{agracz.skin} {n} lvl VS {slime.hp}❤{slime.skin} {slime.lvl} lvl")
-while slime.hp > 0:
+while 0==0:
     print(f"twoje ataki to {agracz.ataki}")
     ligma=input("jaki atak wyprowadzasz ")
     if ligma not in agracz.ataki:
@@ -167,11 +187,21 @@ while slime.hp > 0:
         continue
     effekty(agracz,slime)
     effekty(slime,agracz)
-    agracz.atak(enemy=slime,tatak=ligma)
+    if "paralisz" in agracz.effect:
+        agracz.effect.remove("paralisz")
+    else:
+        agracz.atak(enemy=slime,tatak=ligma)
+    if slime.hp <= 0:
+        print("wygrales")
+        break
+
+    if "paralisz" in slime.effect:
+        slime.effect.remove("paralisz")
+    else:
+        slime.atak(agracz)    
     if agracz.hp <=0:
-        break 
-    slime.atak(agracz)    
-    
+        print("przegrales")
+        break
     
     
     
