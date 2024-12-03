@@ -1,9 +1,17 @@
 import random
+import gi
+gi.require_version('Gtk', '4.0')
+gi.require_version('Adw', '1')
+from gi.repository import Gtk, Gdk, Adw
+css_provider = Gtk.CssProvider()
+css_provider.load_from_path('style.css')
+Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 class gracz:
     def __init__(self,hp,n,dmg,ataki,name,skin,effect=[]):
         self.name=name
         self.skin=skin
         self.hp=hp*(n*10)//3
+        self.maxhp=self.hp
         self.dmg=dmg*n//3
         self.ataki=ataki
         self.effect=effect
@@ -79,6 +87,7 @@ class mob:
         self.skin=skin 
         self.lvl=random.randint((1+n)*2,n*5)
         self.hp=hp*self.lvl//3
+        self.maxhp=self.hp
         self.dmgorg=dmg*self.lvl//3
         self.dmg=dmg*self.lvl//3
         self.ataki=ataki
@@ -173,12 +182,60 @@ def effekty(enemy,ty):
         if ty.kys < 0:
             ty.dmg = ty.dmgorg
             ty.effect.remove("krzyk starej")
+class App(Adw.Application):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.connect("activate", self.on_activate)
+    def on_activate(self,app):
+        self.win = walka(application=app)
+        self.win.present()
+class walka(Gtk.ApplicationWindow,enemy,gracz):
+     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.set_size_request(1111, 690)
+        self.set_title("walka")
+        self.skr()
+    def skr():
+        self.mainbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.set_child(self.mainbox)
+        enemyhp = Gtk.Label(label=f"{enemy.hp}")
+        self.mainbox.append(enemyhp)
+        self.mainbox.append(graczhp)
+    def hppoka():
+        b = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        b1 = Gtk.Box(gtk.Orientation.HORIZONTAL, vexpand=True) # enemy
+        b11 = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        b12 = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        b2 = Gtk.Box(gtk.Orientation.HORIZONTAL, vexpand=True)# player
+        b21 = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        b22 = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        b3 = Gtk.Box(gtk.Orientation.HORIZONTAL, vexpand=True) #gui
+        b31 = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        b32 = Gtk.Box(gtk.Orientation.VERTICAL, hexpand=True)
+        hpgracz = Gtk.ProgressBar()
+        hpgracz.set_show_text(False)
+        graczhp = Gtk.Label(label=f"{gracz.name}")
+        graczskin = Gtk.Label(label=fr"{gracz.skin}")
+        b22.append(graczskin)
+        b22.append(graczhp)
+        hpgracz.set_fraction(gracz.hp/gracz.maxhp)
+        b22.append(hpgracz)
+        hpenemy = Gtk.ProgressBar()
+        hpenemy.set_show_text(False)
+        enemyhp = Gtk.Label(label=f"{enemy.name}")
+        enemyskin = Gtk.Label(label=fr"{enemy.skin}")
+        b11.append(enemyskin)
+        b11.append(enemyhp)
+        hpgracz.set_fraction(enemy.hp/enemy.maxhp)
+        b11.append(hpenemy)
         
-                
+        
 n=3
 agracz=gracz(hp=100,n=n,dmg=10,ataki=["bite","smite","osłabienie","lifedrain","krzyk starej","thunderbolt"],name="gracz",skin=r"🐱‍👤")
 slime=mob(hp=200,n=n,dmg=10,ataki=["bite","smite","lifedrain","osłabienie","krzyk starej","thunderbolt"],name="slime",skin=r"🟢",typ="slime")
 print(fr"{agracz.hp}❤{agracz.skin} {n} lvl VS {slime.hp}❤{slime.skin} {slime.lvl} lvl")
+app = App(application_id=f"obogowie")
+app.run()
 while 0==0:
     print(f"twoje ataki to {agracz.ataki}")
     ligma=input("jaki atak wyprowadzasz ")
